@@ -4,8 +4,11 @@
   "description": "Module MD - markdown & html documentation generator",
   "keywords": [
     "module",
-    "markdown", "html",
-    "api", "doc", "docs",
+    "markdown",
+    "html",
+    "api",
+    "doc",
+    "docs",
     "documentation"
   ],
   "author": {
@@ -19,6 +22,7 @@
   "private": true,
   "dependencies": {
     "ast-walker": "git+https://github.com/skenqbx/ast-walker.git#master",
+    "espree": "2.0.0",
     "read-package-json": "1.3.3",
     "read-package-tree": "3.0.0"
   },

@@ -8,7 +8,6 @@ Stability: 1 - Experimental
 
 ## Tests
 
-
 ```bash
 npm test
 firefox coverage/lcov-report/index.html
@@ -17,8 +16,8 @@ firefox coverage/lcov-report/index.html
 ### Coverage
 
 ```
-Statements   : XX.XX% ( YY/ZZ )
-Branches     : XX.XX% ( YY/ZZ )
-Functions    : XX.XX% ( YY/ZZ )
-Lines        : XX.XX% ( YY/ZZ )
+Statements   : 80.95% ( 68/84 )
+Branches     : 56.10% ( 23/41 )
+Functions    : 83.33% ( 10/12 )
+Lines        : 80.95% ( 68/84 )
 ```
