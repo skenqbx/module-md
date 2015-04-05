@@ -22,6 +22,7 @@
   "private": true,
   "dependencies": {
     "ast-walker": "git+https://github.com/skenqbx/ast-walker.git#master",
+    "file-emitter": "git+https://github.com/skenqbx/file-emitter.git#master",
     "espree": "2.0.0",
     "read-package-json": "1.3.3",
     "read-package-tree": "3.0.0"
