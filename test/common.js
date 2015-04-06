@@ -3,6 +3,7 @@ var fs = require('fs');
 var path = require('path');
 
 exports.fixtures = path.resolve(__dirname, 'fixtures');
+exports.root = path.resolve(__dirname, '../');
 
 var source = null;
 
