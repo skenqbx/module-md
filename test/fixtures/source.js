@@ -35,6 +35,9 @@ Test.prototype.abc = function(value) {
 
   console.log('abc:', value);
 
+  /**
+   * Some call
+   */
   this.emit('xxx', test, function xxx() {
 
   });
