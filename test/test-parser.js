@@ -24,5 +24,8 @@ suite('parser', function() {
     assert.strictEqual(data.callbacks[0].arguments[0], '\'xxx\'');
     assert.strictEqual(data.callbacks[0].arguments[1], 'test');
     assert.strictEqual(data.callbacks[0].arguments[2], '{CALLBACK}');
+
+    assert.deepEqual(data.callbacks[0].scope,
+        ['Program', 'Test.prototype.abc']);
   });
 });
