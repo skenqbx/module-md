@@ -42,3 +42,11 @@ Test.prototype.abc = function(value) {
 
   });
 };
+
+
+/**
+ * no-op
+ */
+function test() {
+
+}
