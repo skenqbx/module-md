@@ -27,8 +27,6 @@ suite('MD', function() {
 
 
   test('parse', function(done) {
-    md.parse(function(err) {
-      done(err);
-    });
+    md.parse(done);
   });
 });

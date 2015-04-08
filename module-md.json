@@ -1,0 +1,1226 @@
+{
+  "/index.js": {
+    "name": "/index.js",
+    "stats": {
+      "dev": 38,
+      "mode": 33204,
+      "nlink": 1,
+      "uid": 1000,
+      "gid": 1000,
+      "rdev": 0,
+      "blksize": 4096,
+      "ino": 1586375,
+      "size": 50,
+      "blocks": 24,
+      "atime": "2015-04-08T12:26:26.000Z",
+      "mtime": "2015-04-02T20:03:21.000Z",
+      "ctime": "2015-04-02T20:03:21.000Z"
+    },
+    "data": "'use strict';\n\nmodule.exports = require('./lib');\n",
+    "parsed": {
+      "requires": [],
+      "exports": [
+        {
+          "left": "module.exports",
+          "right": "require",
+          "scope": [
+            "Program"
+          ],
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 0
+            },
+            "end": {
+              "line": 3,
+              "column": 33
+            }
+          },
+          "range": [
+            15,
+            48
+          ]
+        }
+      ],
+      "classes": {},
+      "functions": [],
+      "callbacks": []
+    }
+  },
+  "/lib/ast-tools.js": {
+    "name": "/lib/ast-tools.js",
+    "stats": {
+      "dev": 38,
+      "mode": 33204,
+      "nlink": 1,
+      "uid": 1000,
+      "gid": 1000,
+      "rdev": 0,
+      "blksize": 4096,
+      "ino": 1586548,
+      "size": 1516,
+      "blocks": 24,
+      "atime": "2015-04-08T12:26:28.000Z",
+      "mtime": "2015-04-04T20:50:37.000Z",
+      "ctime": "2015-04-04T20:50:37.000Z"
+    },
+    "data": "'use strict';\n\n\nfunction toString(node) {\n  var string;\n\n  switch (node.type) {\n    case 'Identifier':\n      string = node.p('name');\n      break;\n\n    case 'Literal':\n      string = node.p('raw');\n      break;\n\n    case 'MemberExpression':\n      string = toString(node.n('object'));\n\n      if (node.n('property')) {\n        if (node.p('computed')) {\n          string += '[' + toString(node.n('property')) + ']';\n        } else {\n          string += '.' + toString(node.n('property'));\n        }\n      }\n      break;\n\n    case 'ThisExpression':\n      string = 'this';\n\n      if (node.n('property')) {\n        if (node.p('computed')) {\n          string += '[' + toString(node.n('property')) + ']';\n        } else {\n          string += '.' + toString(node.n('property'));\n        }\n      }\n      break;\n\n    case 'CallExpression':\n      string = toString(node.n('callee'));\n      break;\n\n    case 'NewExpression':\n      console.log('NewExpression');\n      string = '{' + node.type + '}';\n      break;\n\n    case 'FunctionExpression':\n      if (node.n('id')) {\n        string = toString(node.n('id'));\n      }\n      break;\n\n    case 'FunctionDeclaration':\n      string = toString(node.n('id'));\n      break;\n\n    default:\n      string = '{' + node.type + '}';\n  }\n\n  return string;\n}\nexports.toString = toString;\n\n\nfunction toList(nodes) {\n  var i, list = [];\n\n  if (!nodes) {\n    return list;\n  }\n\n  for (i = 0; i < nodes.length; ++i) {\n    list.push(toString(nodes[i]));\n  }\n\n  return list;\n}\nexports.toList = toList;\n",
+    "parsed": {
+      "requires": [],
+      "exports": [
+        {
+          "left": "exports.toString",
+          "right": "toString",
+          "scope": [
+            "Program"
+          ],
+          "loc": {
+            "start": {
+              "line": 65,
+              "column": 0
+            },
+            "end": {
+              "line": 65,
+              "column": 27
+            }
+          },
+          "range": [
+            1280,
+            1307
+          ]
+        },
+        {
+          "left": "exports.toList",
+          "right": "toList",
+          "scope": [
+            "Program"
+          ],
+          "loc": {
+            "start": {
+              "line": 81,
+              "column": 0
+            },
+            "end": {
+              "line": 81,
+              "column": 23
+            }
+          },
+          "range": [
+            1491,
+            1514
+          ]
+        }
+      ],
+      "classes": {},
+      "functions": [
+        {
+          "id": "toString",
+          "params": [
+            "node"
+          ],
+          "scope": [
+            "Program"
+          ],
+          "docblock": null,
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 0
+            },
+            "end": {
+              "line": 64,
+              "column": 1
+            }
+          },
+          "range": [
+            16,
+            1279
+          ]
+        },
+        {
+          "id": "toList",
+          "params": [
+            "nodes"
+          ],
+          "scope": [
+            "Program"
+          ],
+          "docblock": null,
+          "loc": {
+            "start": {
+              "line": 68,
+              "column": 0
+            },
+            "end": {
+              "line": 80,
+              "column": 1
+            }
+          },
+          "range": [
+            1311,
+            1490
+          ]
+        }
+      ],
+      "callbacks": []
+    }
+  },
+  "/lib/context.js": {
+    "name": "/lib/context.js",
+    "stats": {
+      "dev": 38,
+      "mode": 33204,
+      "nlink": 1,
+      "uid": 1000,
+      "gid": 1000,
+      "rdev": 0,
+      "blksize": 4096,
+      "ino": 1584610,
+      "size": 191,
+      "blocks": 24,
+      "atime": "2015-04-08T12:34:06.000Z",
+      "mtime": "2015-04-08T12:34:06.000Z",
+      "ctime": "2015-04-08T12:34:06.000Z"
+    },
+    "data": "'use strict';\n\n\n\n/**\n * @constructor\n */\nfunction Context() {\n  this.files = {};\n}\nmodule.exports = Context;\n\n\nContext.prototype.addFile = function(file) {\n  this.files[file.name] = file;\n};\n",
+    "parsed": {
+      "requires": [],
+      "exports": [
+        {
+          "left": "module.exports",
+          "right": "Context",
+          "scope": [
+            "Program"
+          ],
+          "loc": {
+            "start": {
+              "line": 11,
+              "column": 0
+            },
+            "end": {
+              "line": 11,
+              "column": 24
+            }
+          },
+          "range": [
+            83,
+            107
+          ]
+        }
+      ],
+      "classes": {
+        "Context": {
+          "ctor": {
+            "id": "Context",
+            "params": [],
+            "scope": [
+              "Program"
+            ],
+            "docblock": {
+              "message": "",
+              "params": {},
+              "ctor": true,
+              "extends": false,
+              "return": false
+            },
+            "loc": {
+              "start": {
+                "line": 8,
+                "column": 0
+              },
+              "end": {
+                "line": 10,
+                "column": 1
+              }
+            },
+            "range": [
+              41,
+              82
+            ]
+          },
+          "addFile": {
+            "id": "Context.prototype.addFile",
+            "params": [
+              "file"
+            ],
+            "scope": [
+              "Program"
+            ],
+            "docblock": null,
+            "loc": {
+              "start": {
+                "line": 14,
+                "column": 28
+              },
+              "end": {
+                "line": 16,
+                "column": 1
+              }
+            },
+            "range": [
+              139,
+              189
+            ]
+          }
+        }
+      },
+      "functions": [],
+      "callbacks": []
+    }
+  },
+  "/lib/index.js": {
+    "name": "/lib/index.js",
+    "stats": {
+      "dev": 38,
+      "mode": 33204,
+      "nlink": 1,
+      "uid": 1000,
+      "gid": 1000,
+      "rdev": 0,
+      "blksize": 4096,
+      "ino": 1586491,
+      "size": 97,
+      "blocks": 24,
+      "atime": "2015-04-08T12:26:28.000Z",
+      "mtime": "2015-04-03T17:37:52.000Z",
+      "ctime": "2015-04-03T17:37:52.000Z"
+    },
+    "data": "'use strict';\n\nmodule.exports = exports = require('./md');\nexports.parser = require('./parser');\n",
+    "parsed": {
+      "requires": [],
+      "exports": [
+        {
+          "left": "module.exports",
+          "right": "{AssignmentExpression}",
+          "scope": [
+            "Program"
+          ],
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 0
+            },
+            "end": {
+              "line": 3,
+              "column": 42
+            }
+          },
+          "range": [
+            15,
+            57
+          ]
+        },
+        {
+          "left": "exports.parser",
+          "right": "require",
+          "scope": [
+            "Program"
+          ],
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 0
+            },
+            "end": {
+              "line": 4,
+              "column": 36
+            }
+          },
+          "range": [
+            59,
+            95
+          ]
+        }
+      ],
+      "classes": {},
+      "functions": [],
+      "callbacks": []
+    }
+  },
+  "/lib/md.js": {
+    "name": "/lib/md.js",
+    "stats": {
+      "dev": 38,
+      "mode": 33204,
+      "nlink": 1,
+      "uid": 1000,
+      "gid": 1000,
+      "rdev": 0,
+      "blksize": 4096,
+      "ino": 1586542,
+      "size": 1642,
+      "blocks": 24,
+      "atime": "2015-04-08T12:37:21.000Z",
+      "mtime": "2015-04-08T12:37:21.000Z",
+      "ctime": "2015-04-08T12:37:21.000Z"
+    },
+    "data": "'use strict';\nvar fs = require('fs');\nvar path = require('path');\nvar readPackageJSON = require('read-package-json');\nvar FileEmitter = require('file-emitter');\nvar Parser = require('./parser');\nvar Context = require('./context');\n\n\n\nfunction MD(modulePath) {\n  if (!(this instanceof MD)) {\n    return new MD(modulePath);\n  }\n  this.modulePath = path.resolve(process.cwd(), modulePath);\n  this.parser = new Parser();\n\n  this.context = new Context();\n\n  this.rawJSON = null;\n  this.npmJSON = null;\n}\nmodule.exports = MD;\n\n\nMD.prototype.init = function(callback) {\n  var self = this;\n  var packageJSON = this.modulePath + '/package.json';\n\n  fs.readFile(packageJSON, function(err, data) {\n    if (err) {\n      return callback(err);\n    }\n    self.rawJSON = JSON.parse(data);\n\n    readPackageJSON(packageJSON, null, true, function(err2, data2) {\n      if (err2) {\n        return callback(err2);\n      }\n      self.npmJSON = data2;\n\n      callback();\n    });\n  });\n};\n\n\nMD.prototype.parse = function(callback) {\n  var self = this;\n  var source = this.modulePath;\n  var errors = [];\n\n  var fe = new FileEmitter(source, {\n    pattern: /.*\\.js$/,\n    maxFileSize: 1048576,\n    ignore: [\n      'bin',\n      'node_modules',\n      '.git',\n      'test',\n      'coverage'\n    ]\n  });\n\n  fe.on('error', function(err) {\n    errors.push(err);\n  });\n\n  fe.on('file', function(file) {\n    file.data = file.data.toString();\n    file.parsed = self.parser.parse(file.data);\n\n    self.context.addFile(file);\n  });\n\n  fe.once('end', function(hadError) {\n    if (hadError) {\n      return callback(errors.slice(-1));\n    }\n    callback(null, self.context);\n  });\n};\n",
+    "parsed": {
+      "requires": [
+        {
+          "var": "fs",
+          "params": [
+            "'fs'"
+          ],
+          "scope": [
+            "Program"
+          ],
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 9
+            },
+            "end": {
+              "line": 2,
+              "column": 22
+            }
+          },
+          "range": [
+            23,
+            36
+          ]
+        },
+        {
+          "var": "path",
+          "params": [
+            "'path'"
+          ],
+          "scope": [
+            "Program"
+          ],
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 11
+            },
+            "end": {
+              "line": 3,
+              "column": 26
+            }
+          },
+          "range": [
+            49,
+            64
+          ]
+        },
+        {
+          "var": "readPackageJSON",
+          "params": [
+            "'read-package-json'"
+          ],
+          "scope": [
+            "Program"
+          ],
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 22
+            },
+            "end": {
+              "line": 4,
+              "column": 50
+            }
+          },
+          "range": [
+            88,
+            116
+          ]
+        },
+        {
+          "var": "FileEmitter",
+          "params": [
+            "'file-emitter'"
+          ],
+          "scope": [
+            "Program"
+          ],
+          "loc": {
+            "start": {
+              "line": 5,
+              "column": 18
+            },
+            "end": {
+              "line": 5,
+              "column": 41
+            }
+          },
+          "range": [
+            136,
+            159
+          ]
+        },
+        {
+          "var": "Parser",
+          "params": [
+            "'./parser'"
+          ],
+          "scope": [
+            "Program"
+          ],
+          "loc": {
+            "start": {
+              "line": 6,
+              "column": 13
+            },
+            "end": {
+              "line": 6,
+              "column": 32
+            }
+          },
+          "range": [
+            174,
+            193
+          ]
+        },
+        {
+          "var": "Context",
+          "params": [
+            "'./context'"
+          ],
+          "scope": [
+            "Program"
+          ],
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 14
+            },
+            "end": {
+              "line": 7,
+              "column": 34
+            }
+          },
+          "range": [
+            209,
+            229
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "left": "module.exports",
+          "right": "MD",
+          "scope": [
+            "Program"
+          ],
+          "loc": {
+            "start": {
+              "line": 23,
+              "column": 0
+            },
+            "end": {
+              "line": 23,
+              "column": 19
+            }
+          },
+          "range": [
+            499,
+            518
+          ]
+        }
+      ],
+      "classes": {
+        "MD": {
+          "ctor": {
+            "id": "MD",
+            "params": [
+              "modulePath"
+            ],
+            "scope": [
+              "Program"
+            ],
+            "docblock": null,
+            "loc": {
+              "start": {
+                "line": 11,
+                "column": 0
+              },
+              "end": {
+                "line": 22,
+                "column": 1
+              }
+            },
+            "range": [
+              234,
+              498
+            ]
+          },
+          "init": {
+            "id": "MD.prototype.init",
+            "params": [
+              "callback"
+            ],
+            "scope": [
+              "Program"
+            ],
+            "docblock": null,
+            "loc": {
+              "start": {
+                "line": 26,
+                "column": 20
+              },
+              "end": {
+                "line": 45,
+                "column": 1
+              }
+            },
+            "range": [
+              542,
+              962
+            ]
+          },
+          "parse": {
+            "id": "MD.prototype.parse",
+            "params": [
+              "callback"
+            ],
+            "scope": [
+              "Program"
+            ],
+            "docblock": null,
+            "loc": {
+              "start": {
+                "line": 48,
+                "column": 21
+              },
+              "end": {
+                "line": 82,
+                "column": 1
+              }
+            },
+            "range": [
+              987,
+              1640
+            ]
+          }
+        }
+      },
+      "functions": [],
+      "callbacks": [
+        {
+          "callee": "fs.readFile",
+          "arguments": [
+            "packageJSON",
+            "{CALLBACK}"
+          ],
+          "id": "<anonymous>",
+          "params": [
+            "err",
+            "data"
+          ],
+          "scope": [
+            "Program",
+            "MD.prototype.init"
+          ],
+          "docblock": null,
+          "loc": {
+            "start": {
+              "line": 30,
+              "column": 27
+            },
+            "end": {
+              "line": 44,
+              "column": 3
+            }
+          },
+          "range": [
+            665,
+            958
+          ]
+        },
+        {
+          "callee": "readPackageJSON",
+          "arguments": [
+            "packageJSON",
+            "null",
+            "true",
+            "{CALLBACK}"
+          ],
+          "id": "<anonymous>",
+          "params": [
+            "err2",
+            "data2"
+          ],
+          "scope": [
+            "Program",
+            "MD.prototype.init",
+            "<anonymous>"
+          ],
+          "docblock": null,
+          "loc": {
+            "start": {
+              "line": 36,
+              "column": 45
+            },
+            "end": {
+              "line": 43,
+              "column": 5
+            }
+          },
+          "range": [
+            819,
+            952
+          ]
+        },
+        {
+          "callee": "fe.on",
+          "arguments": [
+            "'error'",
+            "{CALLBACK}"
+          ],
+          "id": "<anonymous>",
+          "params": [
+            "err"
+          ],
+          "scope": [
+            "Program",
+            "MD.prototype.parse"
+          ],
+          "docblock": null,
+          "loc": {
+            "start": {
+              "line": 65,
+              "column": 17
+            },
+            "end": {
+              "line": 67,
+              "column": 3
+            }
+          },
+          "range": [
+            1290,
+            1331
+          ]
+        },
+        {
+          "callee": "fe.on",
+          "arguments": [
+            "'file'",
+            "{CALLBACK}"
+          ],
+          "id": "<anonymous>",
+          "params": [
+            "file"
+          ],
+          "scope": [
+            "Program",
+            "MD.prototype.parse"
+          ],
+          "docblock": null,
+          "loc": {
+            "start": {
+              "line": 69,
+              "column": 16
+            },
+            "end": {
+              "line": 74,
+              "column": 3
+            }
+          },
+          "range": [
+            1351,
+            1490
+          ]
+        },
+        {
+          "callee": "fe.once",
+          "arguments": [
+            "'end'",
+            "{CALLBACK}"
+          ],
+          "id": "<anonymous>",
+          "params": [
+            "hadError"
+          ],
+          "scope": [
+            "Program",
+            "MD.prototype.parse"
+          ],
+          "docblock": null,
+          "loc": {
+            "start": {
+              "line": 76,
+              "column": 17
+            },
+            "end": {
+              "line": 81,
+              "column": 3
+            }
+          },
+          "range": [
+            1511,
+            1636
+          ]
+        }
+      ]
+    }
+  },
+  "/lib/parser.js": {
+    "name": "/lib/parser.js",
+    "stats": {
+      "dev": 38,
+      "mode": 33204,
+      "nlink": 1,
+      "uid": 1000,
+      "gid": 1000,
+      "rdev": 0,
+      "blksize": 4096,
+      "ino": 1586543,
+      "size": 5342,
+      "blocks": 32,
+      "atime": "2015-04-08T12:26:28.000Z",
+      "mtime": "2015-04-06T21:40:44.000Z",
+      "ctime": "2015-04-06T21:40:44.000Z"
+    },
+    "data": "'use strict';\nvar espree = require('espree');\nvar Walker = require('ast-walker');\nvar tools = require('./ast-tools');\nvar parseDocblock = require('./docblock');\n\n\n\n/**\n * AST Documentation Parser\n *\n * @constructor\n */\nfunction Parser() {\n  if (!(this instanceof Parser)) {\n    return new Parser();\n  }\n  this.types = new Walker.Types();\n  this.espreeOptions = {\n    range: true,\n    loc: true,\n    attachComment: true\n  };\n}\nmodule.exports = Parser;\n\n\nParser.prototype.parse = function(source) {\n  var ast = espree.parse(source, this.espreeOptions);\n\n  var walker = new Walker(ast, {\n    types: this.types\n  });\n\n  return this._parse(walker);\n};\n\n\nParser.prototype._parse = function(walker) {\n  var exports = [];\n  var classes = {};\n  var functions = [];\n  var callbacks = [];\n  var requires = [];\n  var scope = [walker.root.name];\n\n  walker.on('pre-FunctionDeclaration', function(node) {\n    var id = tools.toString(node.n('id'));\n    var docblock = node.p('leadingComments') ?\n        node.p('leadingComments').slice(-1)[0] : null;\n\n    if (docblock) {\n      docblock = parseDocblock(docblock.value);\n    }\n\n    if (id[0] === id[0].toUpperCase()) {\n      classes[id] = {\n        ctor: {\n          id: id,\n          params: tools.toList(node.n('params')),\n          scope: scope.slice(),\n          docblock: docblock,\n          loc: node.p('loc'),\n          range: node.p('range')\n        }\n      };\n    } else {\n      functions.push({\n        id: id,\n        params: tools.toList(node.n('params')),\n        scope: scope.slice(),\n        docblock: docblock,\n        loc: node.p('loc'),\n        range: node.p('range')\n      });\n    }\n\n    scope.push(id);\n  });\n\n  walker.on('pre-FunctionExpression', function(node) {\n    var docblock, tmp;\n    var id = node.n('id');\n\n    // FUNCTION ASSIGNMENTS\n    if (node.parent.parent.type === 'ExpressionStatement' &&\n        node.parent.type === 'AssignmentExpression') {\n\n      docblock = node.parent.parent.p('leadingComments') ?\n          node.parent.parent.p('leadingComments').slice(-1)[0] : null;\n\n      if (docblock) {\n        docblock = parseDocblock(docblock.value);\n      }\n      id = tools.toString(node.parent.n('left'));\n\n      tmp = id.split('.');\n      if (tmp.length === 3 && tmp[1] === 'prototype') {\n        if (!classes[tmp[0]]) {\n          // TODO: issue error/warning\n          classes[tmp[0]] = {};\n        }\n\n        classes[tmp[0]][tmp[2]] = {\n          id: id,\n          params: tools.toList(node.n('params')),\n          scope: scope.slice(),\n          docblock: docblock,\n          loc: node.p('loc'),\n          range: node.p('range')\n        };\n\n      } else {\n        functions.push({\n          id: id,\n          params: tools.toList(node.n('params')),\n          scope: scope.slice(),\n          docblock: docblock,\n          loc: node.p('loc'),\n          range: node.p('range')\n        });\n      }\n\n      scope.push(id);\n\n    // CALLBACKS\n    } else if (node.parent.type === 'CallExpression' &&\n        node.parent.n('arguments').length === node.idx + 1) {\n\n      docblock = node.parent.parent.p('leadingComments') ?\n          node.parent.parent.p('leadingComments').slice(-1)[0] : null;\n\n      if (docblock) {\n        docblock = parseDocblock(docblock.value);\n      }\n\n      var args = node.parent.n('arguments').slice();\n      args.pop(); // remove the callback\n      args = tools.toList(args);\n\n      args.push('{CALLBACK}');\n      id = id ? tools.toString(id) : '<anonymous>';\n\n      callbacks.push({\n        callee: tools.toString(node.parent.n('callee')),\n        arguments: args,\n        id: id,\n        params: tools.toList(node.n('params')),\n        scope: scope.slice(),\n        docblock: docblock,\n        loc: node.p('loc'),\n        range: node.p('range')\n      });\n      scope.push(id);\n    }\n  });\n\n  walker.on('post-BlockStatement', function(node) {\n    if (node.parent.type === 'FunctionExpression' ||\n        node.parent.type === 'FunctionDeclaration') {\n      scope.pop();\n    }\n  });\n\n  walker.on('post-CallExpression', function(node) {\n    var callee = tools.toString(node.n('callee'));\n\n    if (callee === 'require') {\n      // TODO: detect require-s in MemberExpression-s & AssignmentExpression-s\n      if (node.parent.type === 'VariableDeclarator') {\n        requires.push({\n          var: tools.toString(node.parent.n('id')),\n          params: tools.toList(node.n('arguments')),\n          scope: scope.slice(),\n          loc: node.p('loc'),\n          range: node.p('range')\n        });\n      }\n    }\n  });\n\n  walker.on('post-AssignmentExpression', function(node) {\n    var id;\n\n    if (scope.length === 1 && scope[0] === 'Program') {\n      id = tools.toString(node.n('left'));\n\n      if (id === 'module.exports') {\n        exports.push({\n          left: id,\n          right: tools.toString(node.n('right')),\n          scope: scope.slice(),\n          loc: node.p('loc'),\n          range: node.p('range')\n        });\n\n      } else if (id.substr(0, 8) === 'exports.') {\n\n        exports.push({\n          left: id,\n          right: tools.toString(node.n('right')),\n          scope: scope.slice(),\n          loc: node.p('loc'),\n          range: node.p('range')\n        });\n      }\n    }\n  });\n\n  walker.traverse();\n\n  return {\n    requires: requires,\n    exports: exports,\n    classes: classes,\n    functions: functions,\n    callbacks: callbacks\n  };\n};\n",
+    "parsed": {
+      "requires": [
+        {
+          "var": "espree",
+          "params": [
+            "'espree'"
+          ],
+          "scope": [
+            "Program"
+          ],
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 13
+            },
+            "end": {
+              "line": 2,
+              "column": 30
+            }
+          },
+          "range": [
+            27,
+            44
+          ]
+        },
+        {
+          "var": "Walker",
+          "params": [
+            "'ast-walker'"
+          ],
+          "scope": [
+            "Program"
+          ],
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 13
+            },
+            "end": {
+              "line": 3,
+              "column": 34
+            }
+          },
+          "range": [
+            59,
+            80
+          ]
+        },
+        {
+          "var": "tools",
+          "params": [
+            "'./ast-tools'"
+          ],
+          "scope": [
+            "Program"
+          ],
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 12
+            },
+            "end": {
+              "line": 4,
+              "column": 34
+            }
+          },
+          "range": [
+            94,
+            116
+          ]
+        },
+        {
+          "var": "parseDocblock",
+          "params": [
+            "'./docblock'"
+          ],
+          "scope": [
+            "Program"
+          ],
+          "loc": {
+            "start": {
+              "line": 5,
+              "column": 20
+            },
+            "end": {
+              "line": 5,
+              "column": 41
+            }
+          },
+          "range": [
+            138,
+            159
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "left": "module.exports",
+          "right": "Parser",
+          "scope": [
+            "Program"
+          ],
+          "loc": {
+            "start": {
+              "line": 25,
+              "column": 0
+            },
+            "end": {
+              "line": 25,
+              "column": 23
+            }
+          },
+          "range": [
+            426,
+            449
+          ]
+        }
+      ],
+      "classes": {
+        "Parser": {
+          "ctor": {
+            "id": "Parser",
+            "params": [],
+            "scope": [
+              "Program"
+            ],
+            "docblock": {
+              "message": "AST Documentation Parser",
+              "params": {},
+              "ctor": true,
+              "extends": false,
+              "return": false
+            },
+            "loc": {
+              "start": {
+                "line": 14,
+                "column": 0
+              },
+              "end": {
+                "line": 24,
+                "column": 1
+              }
+            },
+            "range": [
+              219,
+              425
+            ]
+          },
+          "parse": {
+            "id": "Parser.prototype.parse",
+            "params": [
+              "source"
+            ],
+            "scope": [
+              "Program"
+            ],
+            "docblock": null,
+            "loc": {
+              "start": {
+                "line": 28,
+                "column": 25
+              },
+              "end": {
+                "line": 36,
+                "column": 1
+              }
+            },
+            "range": [
+              478,
+              645
+            ]
+          },
+          "_parse": {
+            "id": "Parser.prototype._parse",
+            "params": [
+              "walker"
+            ],
+            "scope": [
+              "Program"
+            ],
+            "docblock": null,
+            "loc": {
+              "start": {
+                "line": 39,
+                "column": 26
+              },
+              "end": {
+                "line": 219,
+                "column": 1
+              }
+            },
+            "range": [
+              675,
+              5340
+            ]
+          }
+        }
+      },
+      "functions": [],
+      "callbacks": [
+        {
+          "callee": "walker.on",
+          "arguments": [
+            "'pre-FunctionDeclaration'",
+            "{CALLBACK}"
+          ],
+          "id": "<anonymous>",
+          "params": [
+            "node"
+          ],
+          "scope": [
+            "Program",
+            "Parser.prototype._parse"
+          ],
+          "docblock": null,
+          "loc": {
+            "start": {
+              "line": 47,
+              "column": 39
+            },
+            "end": {
+              "line": 79,
+              "column": 3
+            }
+          },
+          "range": [
+            873,
+            1659
+          ]
+        },
+        {
+          "callee": "walker.on",
+          "arguments": [
+            "'pre-FunctionExpression'",
+            "{CALLBACK}"
+          ],
+          "id": "<anonymous>",
+          "params": [
+            "node"
+          ],
+          "scope": [
+            "Program",
+            "Parser.prototype._parse"
+          ],
+          "docblock": null,
+          "loc": {
+            "start": {
+              "line": 81,
+              "column": 38
+            },
+            "end": {
+              "line": 156,
+              "column": 3
+            }
+          },
+          "range": [
+            1701,
+            3778
+          ]
+        },
+        {
+          "callee": "walker.on",
+          "arguments": [
+            "'post-BlockStatement'",
+            "{CALLBACK}"
+          ],
+          "id": "<anonymous>",
+          "params": [
+            "node"
+          ],
+          "scope": [
+            "Program",
+            "Parser.prototype._parse"
+          ],
+          "docblock": null,
+          "loc": {
+            "start": {
+              "line": 158,
+              "column": 35
+            },
+            "end": {
+              "line": 163,
+              "column": 3
+            }
+          },
+          "range": [
+            3817,
+            3969
+          ]
+        },
+        {
+          "callee": "walker.on",
+          "arguments": [
+            "'post-CallExpression'",
+            "{CALLBACK}"
+          ],
+          "id": "<anonymous>",
+          "params": [
+            "node"
+          ],
+          "scope": [
+            "Program",
+            "Parser.prototype._parse"
+          ],
+          "docblock": null,
+          "loc": {
+            "start": {
+              "line": 165,
+              "column": 35
+            },
+            "end": {
+              "line": 180,
+              "column": 3
+            }
+          },
+          "range": [
+            4008,
+            4496
+          ]
+        },
+        {
+          "callee": "walker.on",
+          "arguments": [
+            "'post-AssignmentExpression'",
+            "{CALLBACK}"
+          ],
+          "id": "<anonymous>",
+          "params": [
+            "node"
+          ],
+          "scope": [
+            "Program",
+            "Parser.prototype._parse"
+          ],
+          "docblock": null,
+          "loc": {
+            "start": {
+              "line": 182,
+              "column": 41
+            },
+            "end": {
+              "line": 208,
+              "column": 3
+            }
+          },
+          "range": [
+            4541,
+            5178
+          ]
+        }
+      ]
+    }
+  },
+  "/lib/docblock.js": {
+    "name": "/lib/docblock.js",
+    "stats": {
+      "dev": 38,
+      "mode": 33204,
+      "nlink": 1,
+      "uid": 1000,
+      "gid": 1000,
+      "rdev": 0,
+      "blksize": 4096,
+      "ino": 1586551,
+      "size": 2129,
+      "blocks": 24,
+      "atime": "2015-04-08T12:26:28.000Z",
+      "mtime": "2015-04-04T22:04:23.000Z",
+      "ctime": "2015-04-04T22:04:23.000Z"
+    },
+    "data": "'use strict';\n\n\nfunction parse(docblock) {\n  var i, t, p1, p2, p3;\n  var line;\n  var lines = docblock.split('\\n');\n  var sp;\n\n  var doc = {\n    message: '',\n    params: {},\n    ctor: false,\n    extends: false,\n    return: false\n  };\n\n  for (i = 0; i < lines.length; ++i) {\n    sp = lines[i].indexOf('*') + 2;\n    line = lines[i].substr(sp);\n\n    if (line[0] === '@') {\n\n      if (line.indexOf(' ') > -1) {\n        t = line.substr(0, line.indexOf(' '));\n      } else {\n        t = line;\n      }\n\n      switch (t) {\n        case '@param':\n          t = line.substr(t.length + 1);\n          p1 = t.indexOf('}');\n          p1 = t.substr(0, p1 + 1);\n          t = t.substr(p1.length + 1);\n\n          p2 = t.indexOf(' ');\n          if (p2 > -1) {\n            p3 = t.substr(p2 + 1);\n            p2 = t.substr(0, p2);\n          } else {\n            p2 = t;\n            p3 = null;\n          }\n\n          doc.params[p2] = [p1, p3];\n          break;\n        case '@extends':\n          t = line.substr(t.length + 1);\n          doc.extends = t;\n          break;\n        case '@constructor':\n          doc.ctor = true;\n          break;\n        case '@return':\n          t = line.substr(t.length + 1);\n          p1 = t.indexOf('}');\n          p1 = t.substr(0, p1 + 1);\n          t = t.substr(p1.length + 1);\n          doc.return = [p1, t];\n          break;\n      }\n    } else {\n      doc.message += '\\n' + line;\n    }\n  }\n\n  doc.message = doc.message.trim();\n\n  matchParamsToLists(doc);\n\n  return doc;\n}\nmodule.exports = parse;\n\n\nfunction matchParamsToLists(doc) {\n  var params = doc.params;\n  var i, message = doc.message.split('\\n');\n  var p, name;\n\n  for (i = 0; i < message.length; ++i) {\n    if (message[i].substr(0, 2) === '**') {\n      p = message[i].indexOf('**', 2);\n\n      if (p > 0) {\n        name = message[i].substr(2, p - 2);\n\n        if (params[name]) {\n          message.splice(i, 1);\n          params[name][2] = [];\n\n          while (message[i] && message[i][0] === ' ') {\n            params[name][2].push(message.splice(i, 1)[0]);\n          }\n\n          --i;\n        }\n      }\n    }\n  }\n\n  doc.message = message.join('\\n');\n}\n",
+    "parsed": {
+      "requires": [],
+      "exports": [
+        {
+          "left": "module.exports",
+          "right": "parse",
+          "scope": [
+            "Program"
+          ],
+          "loc": {
+            "start": {
+              "line": 74,
+              "column": 0
+            },
+            "end": {
+              "line": 74,
+              "column": 22
+            }
+          },
+          "range": [
+            1489,
+            1511
+          ]
+        }
+      ],
+      "classes": {},
+      "functions": [
+        {
+          "id": "parse",
+          "params": [
+            "docblock"
+          ],
+          "scope": [
+            "Program"
+          ],
+          "docblock": null,
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 0
+            },
+            "end": {
+              "line": 73,
+              "column": 1
+            }
+          },
+          "range": [
+            16,
+            1488
+          ]
+        },
+        {
+          "id": "matchParamsToLists",
+          "params": [
+            "doc"
+          ],
+          "scope": [
+            "Program"
+          ],
+          "docblock": null,
+          "loc": {
+            "start": {
+              "line": 77,
+              "column": 0
+            },
+            "end": {
+              "line": 104,
+              "column": 1
+            }
+          },
+          "range": [
+            1515,
+            2128
+          ]
+        }
+      ],
+      "callbacks": []
+    }
+  }
+}

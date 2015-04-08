@@ -19,6 +19,9 @@
     "type": "git",
     "url": "https://github.com/skenqbx/module-md.git"
   },
+  "bin": {
+    "module-md": "./bin/module-md.js"
+  },
   "private": true,
   "dependencies": {
     "ast-walker": "git+https://github.com/skenqbx/ast-walker.git#master",
