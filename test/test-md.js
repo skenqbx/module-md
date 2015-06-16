@@ -1,6 +1,7 @@
 'use strict';
 /* global suite: false, setup: false, test: false,
     teardown: false, suiteSetup: false, suiteTeardown: false */
+var fs = require('fs');
 var assert = require('assert');
 var common = require('./common');
 var moduleMD = require('../');
@@ -27,6 +28,11 @@ suite('MD', function() {
 
 
   test('parse', function(done) {
-    md.parse(done);
+    // md.parse(done);
+    md.parse(function(err) {
+      fs.writeFileSync('intel.json',
+          JSON.stringify(md.context.intel, null, 2));
+      done(err);
+    });
   });
 });

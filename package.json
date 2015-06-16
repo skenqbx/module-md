@@ -25,26 +25,28 @@
   "private": true,
   "dependencies": {
     "ast-walker": "git+https://github.com/skenqbx/ast-walker.git#master",
-    "espree": "2.0.1",
-    "file-emitter": "git+https://github.com/skenqbx/file-emitter.git#v2.x",
-    "handlebars": "3.0.1",
+    "espree": "2.0.3",
+    "file-emitter": "2.0.0",
+    "handlebars": "3.0.3",
     "read-package-json": "2.0.0"
   },
   "optionalDependencies": {},
   "devDependencies": {
-    "eslint": "0.19.0",
-    "istanbul": "0.3.13",
-    "mocha": "2.2.4",
-    "next-update": "0.7.4"
+    "eslint": "0.23.0",
+    "istanbul": "0.3.15",
+    "mocha": "2.2.5",
+    "next-update": "0.7.9"
   },
   "scripts": {
-    "lint": "node_modules/.bin/eslint ./",
-    "test": "node_modules/.bin/eslint ./ && node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- ./test",
-    "update": "node_modules/.bin/next-update -k",
-    "clean": "rm -rf node_modules/ && rm -rf coverage/ && rm npm-debug.log"
+    "lint": "eslint ./",
+    "test": "npm run lint && istanbul cover _mocha -- ./test",
+    "update": "next-update -k",
+    "log": "changelog42 --no-author --commit-url=https://github.com/skenqbx/module-md/commit",
+    "clean": "rm -rf node_modules/ && rm -rf coverage/ && rm npm-debug.log",
+    "postinstall": "if test -d .git/hooks; then echo '#!/bin/sh\\nnpm test' > .git/hooks/pre-commit && chmod u+x .git/hooks/pre-commit; fi"
   },
   "engines": {
-    "node": ">=0.10",
-    "npm": "~2.7.5"
+    "node": "~0.10.38",
+    "npm": "~2.11.2"
   }
 }
